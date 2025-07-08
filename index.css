@@ -1,82 +1,113 @@
+/* General styling */
 * {
-  font-family: arial;
+  font-family: 'Inter', arial, Helvetica, system-ui, sans-serif; /* Prefer Inter font */
   font-size: 16px;
+  box-sizing: border-box; /* Ensures padding and border are included in element's total width and height */
+}
+
+body {
+  margin: 0;
+  background-color: #f4f7f6; /* Light background for the page */
 }
 
 .container {
-  width: 80%;
-  margin: auto;
-  margin-top: 24px;
-  padding: 16px 0px;
+  width: 90%; /* Adjusted for better responsiveness on larger screens */
+  max-width: 1400px; /* Max width for container */
+  margin: 24px auto; /* Centered with top/bottom margin */
+  padding: 16px;
 }
 
 .card-container {
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
+  flex-wrap: wrap; /* Allows cards to wrap to the next line */
+  justify-content: center; /* Centers cards horizontally */
+  align-items: flex-start; /* Aligns cards to the top of the row */
+  gap: 24px; /* Increased gap for better spacing between cards */
 }
 
-.card-item {
-  border: 1px solid #ddd;
-  padding: 20px 16px;
-  margin: auto;
-  /* cursor: pointer; */
-}
-
-.card-header {
-  width: 300px;
-  height: 180px;
-  margin: auto;
-  cursor: pointer;
-  overflow: hidden;
-}
-
+/* Custom 'card' element styling */
 card {
+  display: block; /* Important: Makes the custom 'card' element behave like a block-level div */
   overflow: hidden;
   position: relative;
+  background-color: #ffffff; /* White background for the card */
+  border-radius: 12px; /* Rounded corners for the card */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  flex: 1 1 calc(25% - 24px); /* Default: 4 cards per row, accounting for gap */
+  min-width: 280px; /* Minimum width for card to prevent squishing */
+  max-width: 320px; /* Max width for a single card item */
 }
 
-card .label {
-  background-color: #043b73;
+card:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* Enhanced shadow on hover */
+}
+
+.label {
+  background-color: #e91d25; /* Red accent for the label */
+  color: white;
   position: absolute;
   top: 10px;
   right: -48px;
   z-index: 10;
   transform: rotate(45deg);
-  padding: 0px 60px;
+  padding: 4px 60px; /* Adjusted padding */
   text-align: center;
+  font-weight: bold;
+  font-size: 14px; /* Label font size */
 }
 
-card .label h2 {
+.label h2 {
+  margin: 0; /* Remove default margin */
   text-transform: uppercase;
   color: white;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 14px; /* Ensure font size is consistent */
+  line-height: 1.2; /* Adjust line height for multi-line text */
+}
+
+.card-header {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-top-left-radius: 12px; /* Match parent border radius */
+  border-top-right-radius: 12px; /* Match parent border radius */
+  display: flex; /* Use flex to center image if it doesn't fill completely */
+  justify-content: center;
+  align-items: center;
 }
 
 .card-header img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: contain; /* Ensures the whole image is visible, no cropping */
   transition: transform 0.75s ease;
+  display: block; /* Remove extra space below image */
 }
 
 .card-header img:hover {
-  transform: scale(1.3);
-  transition: transform 0.75s ease;
+  transform: scale(1.1); /* Slightly smaller zoom for better fit with 'contain' */
 }
 
 .card-body {
-  padding: 8px;
+  padding: 16px; /* Increased padding */
   text-align: center;
 }
 
 .card-body h4 {
-  font-weight: medium !important;
+  font-weight: 600; /* Slightly bolder than normal */
   color: #1f2f49;
+  margin-top: 0; /* Remove default top margin */
+  margin-bottom: 8px; /* Space below heading */
+  line-height: 1.4;
+  min-height: 44px; /* Ensure consistent height for titles */
+}
+
+.card-body p {
+  margin-bottom: 8px;
+  line-height: 1.5;
 }
 
 .card-body p.price-save {
@@ -85,29 +116,90 @@ card .label h2 {
 }
 
 .card-body p span.price {
-  color: #e91d25;
-  font-size: 18px;
+  color: #e91d25; /* Red for price */
+  font-size: 20px; /* Slightly larger price font */
+  font-weight: bold;
 }
 
 .card-body p .delivery-stock {
-  color: green;
-  font-size: 16px;
+  color: #28a745; /* Green for in stock/delivery */
+  font-weight: 500;
 }
 
 .card-footer {
-  display: flex;
-  justify-content: center;
-  padding: 12px 8px;
+  padding: 0 16px 16px; /* Padding for the footer */
 }
 
 .card-footer button {
-  width: 60%;
-  background-color: #043b73;
+  width: 100%; /* Button takes full width of footer padding */
+  background-color: #043b73; /* Dark blue button */
   color: white;
   border: none;
-  padding: 12px 0px;
+  padding: 14px 0;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 8px; /* More rounded button */
   font-weight: bold;
+  font-size: 18px; /* Larger button text */
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(4, 59, 115, 0.3); /* Button shadow */
+}
+
+.card-footer button:hover {
+  background-color: #054a8f; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.card-footer button:active {
+  transform: translateY(0); /* Press down effect */
+  box-shadow: 0 2px 5px rgba(4, 59, 115, 0.3);
+}
+
+/* Responsive Breakpoints */
+
+/* Tablets and smaller desktops: 3 cards per row */
+@media (max-width: 1200px) {
+  card {
+    flex: 1 1 calc(33.333% - 24px); /* 3 cards per row */
+  }
+}
+
+/* Larger mobile devices / Small tablets: 2 cards per row */
+@media (max-width: 900px) {
+  card {
+    flex: 1 1 calc(50% - 24px); /* 2 cards per row */
+  }
+  .container {
+    width: 95%; /* Adjust container width */
+    padding: 10px;
+  }
+}
+
+/* Mobile devices: 1 card per row */
+@media (max-width: 600px) {
+  card {
+    flex: 1 1 100%; /* 1 card per row */
+    max-width: 400px; /* Max width for single card on smaller screens */
+    margin: 0 auto; /* Center card when it's the only one in the row */
+  }
+  .card-container {
+    gap: 20px; /* Slightly reduce gap for single column */
+  }
+}
+
+/* Very small mobile devices (e.g., 320px width) */
+@media (max-width: 380px) {
+  card {
+    border-radius: 8px; /* Slightly less rounded */
+  }
+  .card-body h4 {
+    font-size: 15px;
+  }
+  .card-body p span.price {
+    font-size: 18px;
+  }
+  .card-footer button {
+    padding: 12px 0;
+    font-size: 16px;
+  }
 }
